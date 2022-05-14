@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Header, PageMetadata } from "../components";
+import { Card, Header, PageMetadata } from "../elements";
+import { Box } from "../themablePrimitives";
 
 export function SetPassword() {
   // Mock error and loading states
@@ -25,9 +26,12 @@ export function SetPassword() {
     <PageMetadata flow="signIn" page="phoneOtp">
       <Card>
         <Header.Root>
-          <Header.Title>This is the title</Header.Title>
+          <Header.Title>this is the title</Header.Title>
           <Header.Subtitle>This is the title</Header.Subtitle>
         </Header.Root>
+        <Box>
+          <Box slotName={["petros", "nikos"]} />
+        </Box>
       </Card>
     </PageMetadata>
   );

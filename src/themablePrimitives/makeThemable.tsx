@@ -1,5 +1,5 @@
 import React from "react";
-import { usePageMetadata } from "../components";
+import { usePageMetadata } from "../elements";
 
 type Themable<T = {}> = { slotName?: string | string[] } & T;
 type ThemablePrimitive<T> = React.FunctionComponent<Themable<T>>;
