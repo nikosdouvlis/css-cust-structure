@@ -10,21 +10,40 @@ const fakeGenerateSemanticClassName = (props: any) => {
   return `cl-${first}-${rest.map((a: any) => a).join("")}`;
 };
 
-function makeThemable<P>(component: React.FunctionComponent<P>): ThemablePrimitive<P> {
+function makeThemable<P>(Component: React.FunctionComponent<P>): ThemablePrimitive<P> {
   const ThemableComponent = (props: Themable<P>) => {
     const { slotName, ...restProps } = props;
     const pageMetadata = usePageMetadata();
     const appearance = {} as any; // useAppearance();
     if (!slotName) {
-      return component(restProps as unknown as P);
+      // @ts-ignore
+      return <Component {...restProps} />;
     }
     const className = fakeGenerateSemanticClassName({ slotName, pageMetadata, appearance });
-    return component({ ...restProps, className } as unknown as P);
+    // @ts-ignore
+    return <Component {...{ ...restProps, className }} />;
   };
 
-  const displayName = component.displayName || component.name || "Component";
+  const displayName = Component.displayName || Component.name || "Component";
   ThemableComponent.displayName = `Themable${displayName}`.replace("_", "");
   return ThemableComponent as any;
 }
+
+// function makeThemable<P>(component: React.FunctionComponent<P>): ThemablePrimitive<P> {
+//   const ThemableComponent = (props: Themable<P>) => {
+//     const { slotName, ...restProps } = props;
+//     const pageMetadata = usePageMetadata();
+//     const appearance = {} as any; // useAppearance();
+//     if (!slotName) {
+//       return component(restProps as unknown as P);
+//     }
+//     const className = fakeGenerateSemanticClassName({ slotName, pageMetadata, appearance });
+//     return component({ ...restProps, className } as unknown as P);
+//   };
+//
+//   const displayName = component.displayName || component.name || "Component";
+//   ThemableComponent.displayName = `Themable${displayName}`.replace("_", "");
+//   return ThemableComponent as any;
+// }
 
 export { makeThemable };

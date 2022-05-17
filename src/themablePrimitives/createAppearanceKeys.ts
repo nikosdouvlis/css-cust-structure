@@ -1,4 +1,4 @@
-export const makeSlots = <T extends readonly string[]>(
+export const createAppearanceKeys = <T extends readonly string[]>(
   root: string,
   slots?: T
 ): { root: string } & Record<T[number], string[]> => {

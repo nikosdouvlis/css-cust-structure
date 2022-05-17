@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Header, PageMetadata } from "../elements";
-import { Box } from "../themablePrimitives";
+import { Box, Button, Flex } from "../themablePrimitives";
 
 export function SetPassword() {
   // Mock error and loading states
@@ -23,16 +23,33 @@ export function SetPassword() {
   };
 
   return (
-    <PageMetadata flow="signIn" page="phoneOtp">
-      <Card>
-        <Header.Root>
-          <Header.Title>this is the title</Header.Title>
-          <Header.Subtitle>This is the title</Header.Subtitle>
-        </Header.Root>
-        <Box>
-          <Box slotName={["petros", "nikos"]} />
-        </Box>
-      </Card>
-    </PageMetadata>
+    <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <PageMetadata flow="signIn" page="phoneOtp">
+        <Card>
+          <Header.Root>
+            <Header.Title>Title</Header.Title>
+            <Header.Subtitle>Subtitle</Header.Subtitle>
+          </Header.Root>
+          <Colors />
+          <Button slotName={["form", "submitButton"]}>Continue</Button>
+        </Card>
+      </PageMetadata>
+    </div>
   );
 }
+
+const Colors = () => {
+  return (
+    <Flex gap={"2"} css={{ my: "$8" }} direction={"column"} slotName={["colorContainer"]}>
+      {["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"].map((scale, i) => (
+        <Box
+          slotName={["colorContainer", "box"]}
+          key={scale}
+          css={{ backgroundColor: `\$primary${scale}`, py: "$3", borderRadius: "$2xl" }}
+        >
+          primary{scale}
+        </Box>
+      ))}
+    </Flex>
+  );
+};

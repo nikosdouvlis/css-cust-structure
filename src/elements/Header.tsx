@@ -1,17 +1,26 @@
-import { Box, Heading, makeSlots, Text } from "../themablePrimitives";
+import { Box, createAppearanceKeys, Heading, Text } from "../themablePrimitives";
+import React from "react";
 
-const headerSlots = makeSlots("header", ["title", "subtitle"] as const);
+const keys = createAppearanceKeys("header", ["title", "subtitle"] as const);
 
-const HeaderRoot = (props: React.PropsWithChildren<any>): JSX.Element => {
-  return <Box {...props} slotName={headerSlots.root} />;
+const HeaderRoot = (props: React.PropsWithChildren<{}>): JSX.Element => {
+  return (
+    <Box
+      slotName={keys.root}
+      css={{
+        color: "",
+      }}
+      {...props}
+    />
+  );
 };
 
 const HeaderTitle = (props: React.PropsWithChildren<any>): JSX.Element => {
-  return <Heading {...props} slotName={headerSlots.title} />;
+  return <Heading {...props} slotName={keys.title} />;
 };
 
 const HeaderSubtitle = (props: React.PropsWithChildren<any>): JSX.Element => {
-  return <Text {...props} slotName={headerSlots.subtitle} />;
+  return <Text {...props} slotName={keys.subtitle} />;
 };
 
 export const Header = { Root: HeaderRoot, Title: HeaderTitle, Subtitle: HeaderSubtitle };
